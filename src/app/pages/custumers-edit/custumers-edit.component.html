@@ -1,0 +1,50 @@
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title text-center mb-0">
+        <span *ngIf="id !== 'newCustomer'">Editando o ID <strong>{{ id }}</strong></span>
+        <span *ngIf="id === 'newCustomer'">Inserindo Novo Cadastro</span>
+      </h2>
+      
+    </div>
+    <div class="card-body">
+      <form [formGroup]="customerForm" (ngSubmit)="onSubmit(customerForm.value)">
+        <div class="mb-3">
+          <label for="name" class="form-label">Nome</label>
+          <input type="text" class="form-control" id="name" formControlName="name" placeholder="João da Silva">
+          <div *ngIf="customerForm.get('name')?.invalid && customerForm.get('name')?.dirty"
+            class="text-danger">
+            <div *ngIf="customerForm.get('name')?.errors?.['required']">
+              Nome é obrigatório.
+            </div>
+            <div *ngIf="customerForm.get('name')?.errors?.['minlength']">
+              Nome deve ter mais de 6 caracteres.
+            </div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="dateOfBirth" class="form-label">Data de Nascimento</label>
+          <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth" formControlName="dateOfBirth"
+            placeholder="18/06/2000">
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Endereço de E-mail</label>
+          <input type="email" class="form-control" id="email" name="email" placeholder="name@ada.com"
+            formControlName="email">
+          <div *ngIf="customerForm.get('email')?.invalid && customerForm.get('email')?.dirty" class="text-danger">
+            <div *ngIf="customerForm.get('email')?.errors?.['required']">
+              E-mail é obrigatório.
+            </div>
+            <div *ngIf="customerForm.get('email')?.errors?.['email']">
+              E-mail inválido.
+            </div>
+            <div *ngIf="customerForm.get('email')?.errors?.['invalidEmailAda']">
+              O email deve conter @ada.com
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-dark" [disabled]="!customerForm.valid">Salvar</button>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+.container-main {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.container-main .conteudo {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
